@@ -1,5 +1,8 @@
 // get author, without decoding
 // WordPress doesn't allow funky characters in usernames anyway
 module.exports = (post) => {
-	return post.data.creator[0];
-}
+    if (!post.data.creator) {
+        return [];
+    }
+    return post.data.creator.map((a) => a.replace('.', ' '));
+};

@@ -1,5 +1,9 @@
 # wordpress-export-to-markdown
 
+This is a fork of the repository https://github.com/lonekorean/wordpress-export-to-markdown customized for converting the old mozestudio.com journal to MDX.
+
+---
+
 Converts a WordPress export file into Markdown files that are compatible with static site generators ([Eleventy](https://www.11ty.dev/), [Gatsby](https://www.gatsbyjs.com/), [Hugo](https://gohugo.io/), etc.).
 
 Each post is saved as a separate Markdown file with frontmatter. Images are downloaded and saved.
@@ -9,8 +13,9 @@ Each post is saved as a separate Markdown file with frontmatter. Images are down
 ## Quick Start
 
 You'll need:
-- [Node.js](https://nodejs.org/) installed
-- Your [WordPress export file](https://wordpress.org/support/article/tools-export-screen/) (be sure to export "All content").
+
+-   [Node.js](https://nodejs.org/) installed
+-   Your [WordPress export file](https://wordpress.org/support/article/tools-export-screen/) (be sure to export "All content").
 
 To make things easier, you can rename your WordPress export file to `export.xml` and drop it into the same directory that you run this script from.
 

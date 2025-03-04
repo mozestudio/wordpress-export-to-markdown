@@ -3,11 +3,12 @@
 // field by providing an alias after a ':'. For example, 'date:created' will include 'date' in
 // frontmatter, but renamed to 'created'.
 exports.frontmatter_fields = [
-	'title',
-	'date',
-	'categories',
-	'tags',
-	'coverImage'
+    'slug',
+    'title',
+    'date',
+    'categories',
+    'authors',
+    'coverImage',
 ];
 
 // Time in ms to wait between requesting image files. Increase this if you see timeouts or
@@ -33,7 +34,11 @@ exports.custom_date_timezone = 'utc';
 
 // Categories to be excluded from post frontmatter. This does not filter out posts themselves,
 // just the categories listed in their frontmatter.
-exports.filter_categories = ['uncategorized'];
+exports.filter_categories = [
+    'uncategorized',
+    'senza-categoria',
+    'non-categorizzato',
+];
 
 // Strict SSL is enabled as the safe default when downloading images, but will not work with
 // self-signed servers. You can disable it if you're getting a "self-signed certificate" error.
