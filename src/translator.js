@@ -89,7 +89,10 @@ function initTurndownService() {
                 : '';
             return src
                 ? '<Image filename="' +
-                      src +
+                      src.replace(
+                          /https:\/\/www\.mozestudio\.com\/wp-content\/uploads\/[\d]{4}\/[\d]{2}/g,
+                          'images'
+                      ) +
                       '"' +
                       altString +
                       titleString +

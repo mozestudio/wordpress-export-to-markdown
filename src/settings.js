@@ -9,6 +9,7 @@ exports.frontmatter_fields = [
     'categories',
     'authors',
     'coverImage',
+    'excerpt',
 ];
 
 // Time in ms to wait between requesting image files. Increase this if you see timeouts or

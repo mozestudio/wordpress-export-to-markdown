@@ -129,10 +129,13 @@ async function writeMetaMarkdownFilesPromise(posts, config) {
 
 async function loadMarkdownFilePromise(post) {
     let output = '---\n';
+    let excerpt;
 
     Object.entries(post.frontmatter).forEach(([key, value]) => {
         let outputValue;
-        if (key === 'slug' || key === 'title') {
+        if (key === 'excerpt') {
+            excerpt = (value || '').replace(/"/g, '\\"');
+        } else if (key === 'slug' || key === 'title' || key === 'coverImage') {
             if (Array.isArray(value)) {
                 if (value.length > 0) {
                     // array of one or more strings
@@ -155,7 +158,9 @@ async function loadMarkdownFilePromise(post) {
         }
     });
 
-    output += `---\n\n${post.content}\n`;
+    const intro = excerpt ? '<Intro>' + excerpt + '</Intro>' : '';
+
+    output += `---\n\n${intro}\n\n${post.content}\n`;
     return output;
 }
 
@@ -164,7 +169,12 @@ async function loadMetaMarkdownFilePromise(post) {
 
     Object.entries(post.frontmatter).forEach(([key, value]) => {
         let outputValue;
-        if (key !== 'slug' && key !== 'title') {
+        if (
+            key !== 'slug' &&
+            key !== 'title' &&
+            key !== 'coverImage' &&
+            key !== 'excerpt'
+        ) {
             if (Array.isArray(value)) {
                 if (value.length > 0) {
                     // array of one or more strings
