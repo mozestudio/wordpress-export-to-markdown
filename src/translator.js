@@ -5,6 +5,10 @@ function cleanAttribute(attribute) {
     return attribute ? attribute.replace(/(\n+\s*)+/g, '\n') : '';
 }
 
+function repeat(character, count) {
+    return Array(count + 1).join(character);
+}
+
 function initTurndownService() {
     const turndownService = new turndown({
         headingStyle: 'atx',
@@ -66,7 +70,7 @@ function initTurndownService() {
         },
     });
 
-    // preserve <figure> when it contains a <figcaption>
+    // convert <figure> to custom MDX component
     turndownService.addRule('figure', {
         filter: 'figure',
         replacement: (content, node) => {
@@ -114,6 +118,7 @@ function initTurndownService() {
         },
     });
 
+    // convert <img> to custom MDX component
     turndownService.addRule('img', {
         filter: 'img',
 
@@ -130,6 +135,21 @@ function initTurndownService() {
                       title +
                       '" />'
                 : '';
+        },
+    });
+
+    // preserve #ids for headings
+    turndownService.addRule('heading', {
+        filter: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+
+        replacement: function (content, node) {
+            var hLevel = Number(node.nodeName.charAt(1));
+            var id = cleanAttribute(node.getAttribute('id'));
+            var idString = id ? ' \\{#' + id + '}' : '';
+
+            return (
+                '\n\n' + repeat('#', hLevel) + ' ' + content + idString + '\n\n'
+            );
         },
     });
 

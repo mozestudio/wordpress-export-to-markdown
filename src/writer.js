@@ -160,7 +160,9 @@ async function loadMarkdownFilePromise(post) {
 
     const intro = excerpt ? '<Intro>' + excerpt + '</Intro>' : '';
 
-    output += `---\n\n${intro}\n\n${post.content}\n`;
+    output += `---\n\n${intro}\n\n${post.content
+        .replaceAll('https://www.mozestudio.com/it/', '/')
+        .replaceAll('https://www.mozestudio.com/', '/')}\n`;
     return output;
 }
 
